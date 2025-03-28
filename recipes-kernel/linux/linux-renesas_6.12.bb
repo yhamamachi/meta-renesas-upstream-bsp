@@ -13,6 +13,9 @@ REPO = "git://github.com/morimoto/linux.git"
 BRANCH = "sound-msiof-2025-03-26-2"
 SRC_URI = "${REPO};branch=${BRANCH};protocol=https"
 SRCREV = "2518ccf64c65482b415e5a831057998bfe2bda1d"
+SRC_URI:append = "\
+    file://0006-Draft-FIXME-Force-DSC-clock-on.patch \
+"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
@@ -50,3 +53,4 @@ do_deploy:append() {
         rm -f $deployDir/$dtb_base_name-${KERNEL_DTB_LINK_NAME}.$dtb_ext
     done
 }
+
