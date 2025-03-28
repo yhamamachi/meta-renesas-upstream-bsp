@@ -60,4 +60,4 @@ fi
 
 sleep 1
 
-bitbake core-image-minimal
+bitbake linux-renesas
