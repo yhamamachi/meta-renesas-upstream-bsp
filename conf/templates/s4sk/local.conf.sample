@@ -298,6 +298,6 @@ REPRODUCIBLE_TIMESTAMP_ROOTFS = "${@time.strftime('%s', time.localtime())}"
 
 # Upstream Kernel Builds
 # Set PREFERRED_VERSION to specify Upstream Kernel version
-# Example: 6.1%, 6.6%
+# Example: 6.1%, 6.6%, git%
 PREFERRED_VERSION_linux-renesas = "6.6%"
 LINUXLIBCVERSION = "6.6%"
