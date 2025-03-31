@@ -30,6 +30,7 @@ if [ "$KERNEL_VERSION" == "6.12" ]; then
     sed -i 's|= "6.6%"|= "6.14-rc7%"|g' conf/local.conf
 fi
 
-bitbake linux-renesas
+#bitbake linux-renesas
+bitbake core-image-minimal
 # bitbake core-image-minimal -c populate_sdk
 

@@ -24,6 +24,8 @@ SRC_URI = "${QOS_DRV_URL};branch=${BRANCH};protocol=https"
 
 SRCREV:rcar-gen3 = "90981d2aa1730589fa87b50f07d9feec09396b9b"
 SRCREV:rcar-gen4 = "f4c60b4ad0e96e0de3222dc42179bcade931bd76"
+SRCREV:rcar-gen4:sparrow-hawk = "72a861aab57e0529b0f24ea2febdaa7afce52fda"
+SRC_URI:append:sparrow-hawk = " file://0001-Fix-build-error-with-new-kernel.patch"
 
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/git/qos-module/files/qos/drv"

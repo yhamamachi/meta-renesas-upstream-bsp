@@ -12,6 +12,7 @@ IMAGE_INSTALL:append = " \
     v4l-utils \
     i2c-tools \
     coreutils \
+    kernel-devicetree \
 "
 
 # Qos user packages only supports 64bit.

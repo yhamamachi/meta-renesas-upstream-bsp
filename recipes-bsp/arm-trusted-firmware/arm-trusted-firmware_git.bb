@@ -10,14 +10,17 @@ inherit deploy
 
 PV:rcar-gen3 = "v2.9+renesas+git${SRCPV}"
 PV:rcar-gen4 = "v2.5+renesas+git${SRCPV}"
+PV:rcar-gen4:sparrow-hawk = "v2.7+renesas+git${SRCPV}"
 
 BRANCH:rcar-gen3 = "rcar-gen3_v2.9"
 BRANCH:rcar-gen4 = "rcar-s4_v2.5"
+BRANCH:rcar-gen4:sparrow-hawk = "rcar_gen4_v2.7_v4x"
 
 SRC_URI = "git://github.com/renesas-rcar/arm-trusted-firmware.git;branch=${BRANCH};protocol=https"
 
 SRCREV:rcar-gen3 = "9cdb21f75157fc82e8ca104aa21c4ab722383b04"
 SRCREV:rcar-gen4 = "c005892fdd83a08c363a4cb83ebf7c87386029a3"
+SRCREV:rcar-gen4:sparrow-hawk = "b88b3f5a81b57669e6b0444fd7eaf19f4a039762"
 
 SRC_URI += " file://0000-Makefile-Disable-linker-warning.patch"
 
@@ -63,6 +66,8 @@ s4sk_r8a779f0[default]       = "LSI=S4 CTX_INCLUDE_AARCH32_REGS=0 LOG_LEVEL=10 D
 
 spider_r8a779f0[default]     = "LSI=S4 CTX_INCLUDE_AARCH32_REGS=0 LOG_LEVEL=10 DEBUG=0"
 
+sparrow_hawk_r8a779g3[default]     = "LSI=V4H CTX_INCLUDE_AARCH32_REGS=0 MBEDTLS_COMMON_MK=1 PTP_NONSECURE_ACCESS=1 LOG_LEVEL=20 DEBUG=0 ENABLE_ASSERTIONS=0 E=0"
+
 # requires CROSS_COMPILE set by hand as there is no configure script
 export CROSS_COMPILE="${TARGET_PREFIX}"
 
@@ -101,8 +106,11 @@ do_ipl_compile:append:rcar-gen3 () {
 python do_compile () {
     soc = d.getVar('SOC_FAMILY')
     soc = soc.split(':')[1]
+    print(soc)
     machine = d.getVar('MACHINE_ARCH')
+    print(machine)
     confs_dict = d.getVarFlags(machine + "_" + soc)
+    print(confs_dict)
     confs_list = list(confs_dict.keys())
 
     for conf in confs_list:
