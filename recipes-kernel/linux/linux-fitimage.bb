@@ -7,8 +7,8 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 inherit deploy
 
 DEPENDS += "u-boot-mkimage-native dtc-native"
-RDEPENDS_${PN} = " \
-    kernel \
+DEPENDS += " \
+    linux-renesas \
     arm-trusted-firmware \
 "
 
@@ -21,6 +21,9 @@ FILES:${PN} += " \
 "
 
 do_configure[noexec] = "1"
+do_compile[depends] += "linux-renesas:do_deploy"
+do_compile[depends] += "u-boot:do_deploy"
+
 do_compile() {
     cd ${DEPLOY_DIR}/images/${MACHINE}
     install -m 644 ${WORKDIR}/fit-image.its ./
