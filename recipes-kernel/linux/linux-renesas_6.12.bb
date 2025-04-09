@@ -10,9 +10,9 @@ LINUX_VERSION ?= "6.12.22"
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
 REPO = "git://github.com/morimoto/linux.git"
-BRANCH = "renesas-lts/v6.12-dev"
+BRANCH = "renesas-lts/v6.12.22-2025-04-09-sparrow-hawk-test"
 SRC_URI = "${REPO};branch=${BRANCH};protocol=https"
-SRCREV = "d40c02f47a379bf3537c019e7ad3f9fc1d47824c"
+SRCREV = "bc748d485f47071226e137b68ac586098b30c990"
 SRC_URI:append = "\
     file://0006-Draft-FIXME-Force-DSC-clock-on.patch \
 "
