@@ -14,10 +14,12 @@ DEPENDS += " \
 
 SRC_URI = " \
     file://fit-image.its \
+    file://fit-image-pwm.its \
 "
 
 FILES:${PN} += " \
     /boot/fitImage \
+    /boot/fitImage-pwm \
 "
 
 do_configure[noexec] = "1"
@@ -29,10 +31,16 @@ do_compile() {
     install -m 644 ${WORKDIR}/fit-image.its ./
     sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image.its
     mkimage -f ./fit-image.its ./fitImage
+
+    cd ${DEPLOY_DIR}/images/${MACHINE}
+    install -m 644 ${WORKDIR}/fit-image-pwm.its ./
+    sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image-pwm.its
+    mkimage -f ./fit-image-pwm.its ./fitImage-pwm
 }
 do_install() {
     cd ${DEPLOY_DIR}/images/${MACHINE}
     install -d ${D}/boot
     install -m 644 ./fitImage ${D}/boot
+    install -m 644 ./fitImage-pwm ${D}/boot
 }
 
