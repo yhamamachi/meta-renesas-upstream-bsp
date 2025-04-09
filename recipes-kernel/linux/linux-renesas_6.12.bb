@@ -25,6 +25,10 @@ S = "${WORKDIR}/git"
 KCONFIG_MODE = "--alldefconfig"
 KBUILD_DEFCONFIG = "defconfig"
 
+KERNEL_DEVICETREE:append:sparrow-hawk = " \
+    renesas/r8a779g3-sparrow-hawk-fan-pwm.dtbo \
+"
+
 do_src_package_preprocess () {
     # Trim build paths from comments in generated sources to ensure reproducibility
     sed -i -e "s,${S}/,,g" \
