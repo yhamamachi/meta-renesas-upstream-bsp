@@ -6,13 +6,13 @@ require include/cas-control.inc
 COMPATIBLE_MACHINE = "(rcar-gen3|rcar-gen4)"
 
 #KERNEL_VERSION_SANITY_SKIP = "1"
-LINUX_VERSION ?= "6.14-rc7"
+LINUX_VERSION ?= "6.12.22"
 PV = "${LINUX_VERSION}+git${SRCPV}"
 
 REPO = "git://github.com/morimoto/linux.git"
-BRANCH = "sound-msiof-2025-03-26-2"
+BRANCH = "renesas-lts/v6.12-dev"
 SRC_URI = "${REPO};branch=${BRANCH};protocol=https"
-SRCREV = "2518ccf64c65482b415e5a831057998bfe2bda1d"
+SRCREV = "d40c02f47a379bf3537c019e7ad3f9fc1d47824c"
 SRC_URI:append = "\
     file://0006-Draft-FIXME-Force-DSC-clock-on.patch \
 "

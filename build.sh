@@ -27,7 +27,7 @@ if [ "$KERNEL_VERSION" == "6.1" ]; then
     sed -i 's|= "6.6%"|= "6.1%"|g' conf/local.conf
 fi
 if [ "$KERNEL_VERSION" == "6.12" ]; then
-    sed -i 's|= "6.6%"|= "6.14-rc7%"|g' conf/local.conf
+    sed -i 's|= "6.6%"|= "6.12%"|g' conf/local.conf
 fi
 
 #bitbake linux-renesas
