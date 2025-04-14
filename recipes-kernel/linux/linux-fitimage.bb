@@ -24,7 +24,7 @@ FILES:${PN} += " \
 
 do_configure[noexec] = "1"
 do_compile[depends] += "linux-renesas:do_deploy"
-do_compile[depends] += "u-boot:do_deploy"
+do_compile[depends] += "arm-trusted-firmware:do_deploy"
 
 do_compile() {
     cd ${DEPLOY_DIR}/images/${MACHINE}
