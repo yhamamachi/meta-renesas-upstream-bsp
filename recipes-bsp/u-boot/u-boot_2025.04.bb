@@ -22,6 +22,10 @@ SRC_URI:append = " \
     file://0002-arm64-dts-renesas-r8a779g3-Add-Renesas-R-Car-V4H-Spa.patch \
     file://0003-HACK-Enable-PWM-fan-at-boot.patch \
 "
+# HACK patch
+SRC_URI:append = " \
+    file://0001-HACK-Limit-ethernet-speed-to-100-Mbps.patch \
+"
 
 PV = "v2025.04+git${SRCPV}"
 

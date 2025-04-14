@@ -1,0 +1,30 @@
+From fa92bfc669fdb4b18b5c19765bb37ea239bb97d5 Mon Sep 17 00:00:00 2001
+From: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+Date: Mon, 14 Apr 2025 16:53:50 +0900
+Subject: [PATCH] HACK: Limit ethernet speed to 100 Mbps
+
+Ethernet(1Gbps mode) is unstable on current version of V4HSBC.
+This patch limits the max speed to 100 Mbps.
+It looks better stable than w/o patch as of now.
+
+Signed-off-by: Yuya Hamamachi <yuya.hamamachi.sx@renesas.com>
+---
+ drivers/net/ravb.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 7286ad19598..7b8d8f9f042 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -656,7 +656,7 @@ int ravb_of_to_plat(struct udevice *dev)
+ 	if (pdata->phy_interface == PHY_INTERFACE_MODE_NA)
+ 		return -EINVAL;
+ 
+-	pdata->max_speed = dev_read_u32_default(dev, "max-speed", 1000);
++	pdata->max_speed = dev_read_u32_default(dev, "max-speed", 100);
+ 
+ 	sprintf(bb_miiphy_buses[0].name, dev->name);
+ 
+-- 
+2.34.1
+
