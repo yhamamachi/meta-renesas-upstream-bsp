@@ -30,6 +30,16 @@ if [ "$KERNEL_VERSION" == "6.12" ]; then
     sed -i 's|= "6.6%"|= "6.12%"|g' conf/local.conf
 fi
 
+if [[ "${MACHINE}" == "sparrow-hawk" ]]; then
+    FIRMWARE_LIST=("rcar_gen4_pcie.bin" "renesas_usb_fw.mem")
+    for item in ${FIRMWARE_LIST[@]}; do
+        if [[ ! -e ${SCRIPT_DIR}/firmware/${item} ]]; then
+            echo "${SCRIPT_DIR}/firmware/${item} is not found !!"
+            exit -1
+        fi
+    done
+fi
+
 #bitbake linux-renesas
 bitbake core-image-minimal
 # bitbake core-image-minimal -c populate_sdk
