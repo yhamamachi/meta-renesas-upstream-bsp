@@ -68,4 +68,19 @@ jobs:
       - name: Run build
         run: |
           ./build.sh
+          cd ./build/build-sparrow-hawk/tmp/deploy/images/
+          zip -ry sparrow-hawk.zip sparrow-hawk
+          cd $GITHUB_WORKSPACE
+
+      - name: Create or update 'dev-latest' release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: dev-latest
+          name: Development Latest
+          draft: false
+          prerelease: true
+          files: ./build/build-sparrow-hawk/tmp/deploy/images/sparrow-hawk.zip
+          body: "This is the latest development build."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
