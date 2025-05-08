@@ -301,8 +301,6 @@ REPRODUCIBLE_TIMESTAMP_ROOTFS = "${@time.strftime('%s', time.localtime())}"
 # Example: 6.1%, 6.6%, git%
 PREFERRED_VERSION_linux-renesas = "6.6%"
 LINUXLIBCVERSION = "6.6%"
-PREFERRED_VERSION_u-boot = "v2025.04+git"
-BBMASK:append = "|recipes-bsp/u-boot/u-boot_2020.10.bb"
-BBMASK:append = "|recipes-bsp/u-boot/u-boot*.inc"
+PREFERRED_VERSION_nativesdk-linux-libc-headers = "6.6"
 IMAGE_INSTALL:append = " linux-fitimage"
 
