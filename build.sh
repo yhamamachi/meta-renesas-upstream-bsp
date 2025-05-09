@@ -42,6 +42,10 @@ if [[ "${MACHINE}" == "sparrow-hawk" ]]; then
 fi
 
 cat << EOS >> conf/local.conf
+IMAGE_INSTALL:remove = " cpufreq-initscripts"
+EOS
+
+cat << EOS >> conf/local.conf
 BB_HASHSERVE_UPSTREAM = "wss://hashserv.yoctoproject.org/ws"
 SSTATE_MIRRORS ?= "file://.* http://cdn.jsdelivr.net/yocto/sstate/all/PATH;downloadfilename=PATH"
 BB_HASHSERVE = "auto"
