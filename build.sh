@@ -48,6 +48,25 @@ BB_HASHSERVE = "auto"
 BB_SIGNATURE_HANDLER = "OEEquivHash"
 EOS
 
+sed -i 's/INHERIT:remove = "create-spdx"//' conf/local.conf
+cat << EOS >> conf/local.conf
+# added for SBOM
+# required. enable to generate spdx files.
+INHERIT += "create-spdx"
+
+# optional. if "1", output spdx files will be formatted.
+SPDX_PRETTY = "1"
+
+# optional. if "1", output spdx files includes [file-information section](https://spdx.github.io/spdx-spec/v2.3/file-information/).
+SPDX_INCLUDE_SOURCES = "1"
+
+# optional. if "1", bitbake will create source files archive for each package.
+SPDX_ARCHIVE_SOURCES = "1"
+
+# optional. if "1", bitbake will create output binary archive for each package.
+SPDX_ARCHIVE_PACKAGED = "1"
+EOS
+
 #bitbake linux-renesas
 bitbake core-image-minimal
 # bitbake core-image-minimal -c populate_sdk
