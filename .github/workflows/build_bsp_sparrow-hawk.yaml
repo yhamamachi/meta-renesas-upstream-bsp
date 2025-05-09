@@ -85,7 +85,15 @@ jobs:
           files: |
             ./build/build-sparrow-hawk/tmp/deploy/images/deploy_sparrow-hawk.zip
             ./build/build-sparrow-hawk/tmp/deploy/deploy_spdx_split.z*
-          body: "This is the latest development build."
+          body: |
+            This is the latest development build.
+
+            ### How to use PCIe/USB.
+            Please copy correct firmware into /usr/lib/firmware/, then reboot.
+
+            **Note:**
+            There is no support/help to get the firmware.
+            Please do it at your own risk.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
