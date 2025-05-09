@@ -302,5 +302,6 @@ REPRODUCIBLE_TIMESTAMP_ROOTFS = "${@time.strftime('%s', time.localtime())}"
 PREFERRED_VERSION_linux-renesas = "6.6%"
 LINUXLIBCVERSION = "6.6%"
 PREFERRED_VERSION_nativesdk-linux-libc-headers = "6.6"
+IMAGE_INSTALL:append = " pciutils usbutils"
 IMAGE_INSTALL:append = " linux-fitimage"
 
