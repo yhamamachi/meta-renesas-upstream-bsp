@@ -84,7 +84,6 @@ jobs:
           prerelease: true
           files: |
             ./build/build-sparrow-hawk/tmp/deploy/images/deploy_sparrow-hawk.zip
-            ./build/build-sparrow-hawk/tmp/deploy/deploy_spdx_split.zip
             ./build/build-sparrow-hawk/tmp/deploy/deploy_spdx_split.z*
           body: "This is the latest development build."
         env:
