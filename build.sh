@@ -20,6 +20,7 @@ git -C meta-openembedded checkout -b scarthgap origin/scarthgap
 #git -C meta-renesas-upstream-bsp checkout -b scarthgap origin/scarthgap
 
 cd $WORK
+rm -rf build-$MACHINE/conf
 TEMPLATECONF=${SCRIPT_DIR}/conf/templates/$MACHINE  . poky/oe-init-build-env build-$MACHINE
 sed -i conf/local.conf -e 's/"package_rpm"/"package_deb"/'
 
@@ -39,6 +40,13 @@ if [[ "${MACHINE}" == "sparrow-hawk" ]]; then
         fi
     done
 fi
+
+cat << EOS >> conf/local.conf
+BB_HASHSERVE_UPSTREAM = "wss://hashserv.yoctoproject.org/ws"
+SSTATE_MIRRORS ?= "file://.* http://cdn.jsdelivr.net/yocto/sstate/all/PATH;downloadfilename=PATH"
+BB_HASHSERVE = "auto"
+BB_SIGNATURE_HANDLER = "OEEquivHash"
+EOS
 
 #bitbake linux-renesas
 bitbake core-image-minimal
