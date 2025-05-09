@@ -36,7 +36,8 @@ if [[ "${MACHINE}" == "sparrow-hawk" ]]; then
     for item in ${FIRMWARE_LIST[@]}; do
         if [[ ! -e ${SCRIPT_DIR}/firmware/${item} ]]; then
             echo "${SCRIPT_DIR}/firmware/${item} is not found !!"
-            exit -1
+            echo "Dummy file is created: ${SCRIPT_DIR}/firmware/${item}"
+            touch ${SCRIPT_DIR}/firmware/${item}
         fi
     done
 fi

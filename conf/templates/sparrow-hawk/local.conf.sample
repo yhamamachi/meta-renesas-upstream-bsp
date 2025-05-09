@@ -304,4 +304,7 @@ LINUXLIBCVERSION = "6.6%"
 PREFERRED_VERSION_nativesdk-linux-libc-headers = "6.6"
 IMAGE_INSTALL:append = " pciutils usbutils"
 IMAGE_INSTALL:append = " linux-fitimage"
+IMAGE_INSTALL:append = " kernel-modules"
+IMAGE_INSTALL:append = " sparrow-hawk-fw"
+
 
