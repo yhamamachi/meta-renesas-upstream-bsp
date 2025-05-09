@@ -69,7 +69,9 @@ jobs:
         run: |
           ./build.sh
           cd ./build/build-sparrow-hawk/tmp/deploy/images/
-          zip -ry sparrow-hawk.zip sparrow-hawk
+          zip -ry deploy_sparrow-hawk.zip sparrow-hawk
+          cd ../
+          zip -ry -s 1900m deploy_spdx_split.zip spdx/
           cd $GITHUB_WORKSPACE
 
       - name: Create or update 'dev-latest' release
@@ -79,7 +81,10 @@ jobs:
           name: Development Latest
           draft: false
           prerelease: true
-          files: ./build/build-sparrow-hawk/tmp/deploy/images/sparrow-hawk.zip
+          files: |
+            ./build/build-sparrow-hawk/tmp/deploy/images/deploy_sparrow-hawk.zip
+            ./build/build-sparrow-hawk/tmp/deploy/deploy_spdx_split.zip
+            ./build/build-sparrow-hawk/tmp/deploy/deploy_spdx_split.z*
           body: "This is the latest development build."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
