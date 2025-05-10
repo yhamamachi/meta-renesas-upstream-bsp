@@ -46,7 +46,20 @@ do_compile:prepend:sparrow-hawk () {
 
     echo "" >> ${S}/arch/arm64/boot/dts/renesas/r8a779g3.dtsi
     cat ${S}/arch/arm64/boot/dts/renesas/r8a779g3-sparrow-hawk-uio.dtso >> ${S}/arch/arm64/boot/dts/renesas/r8a779g3.dtsi
+    # Change thcodes
+    sed -i ${S}/drivers/thermal/renesas/rcar_gen3_thermal.c \
+        -e 's/{ 3397, 2800, 2221 },/{ 3218, 2617, 1980 },/' \
+        -e 's/{ 3393, 2795, 2216 },/{ 3218, 2617, 1980 },/' \
+        -e 's/{ 3389, 2805, 2237 },/{ 3218, 2617, 1980 },/' \
+        -e 's/{ 3415, 2694, 2195 },/{ 3218, 2617, 1980 },/' \
+        -e 's/{ 3356, 2724, 2244 },/{ 3218, 2617, 1980 },/'
+    # Change ptat
+    sed -i ${S}/drivers/thermal/renesas/rcar_gen3_thermal.c \
+        -e 's/ptat[0] = 2631/ptat[0] = 3274/' \
+        -e 's/ptat[1] = 1509/ptat[1] = 2164/' \
+        -e 's/ptat[2] = 435/ptat[2] = 985/' \
 }
+
 do_src_package_preprocess () {
     # Trim build paths from comments in generated sources to ensure reproducibility
     sed -i -e "s,${S}/,,g" \
