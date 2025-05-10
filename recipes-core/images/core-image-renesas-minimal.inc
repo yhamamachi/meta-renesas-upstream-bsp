@@ -36,3 +36,7 @@ IMAGE_INSTALL:append = " ethtool"
 
 # Enable package manager
 EXTRA_IMAGE_FEATURES += "package-management"
+
+# Enable ssh feature
+EXTRA_IMAGE_FEATURES:append = " ssh-server-openssh"
+
