@@ -9,6 +9,27 @@ SCRIPT_DIR=$(cd `dirname $0` && pwd)
 mkdir -p ${SCRIPT_DIR}/build
 cd ${SCRIPT_DIR}/build
 export WORK=`pwd`
+TARGET_IMAGE=core-image-minimal
+USE_GPU=no
+
+Usage () {
+    echo "Usage:"
+    echo "    $0 <image_option> <options>"
+    echo "image option:"
+    echo "    --console:      Use CLI(default)"
+    echo "    --weston-nogpu: Use GUI, but no graphics accelaration"
+    echo "options:"
+    echo "    -h | --help:    Show this help"
+    exit
+}
+for arg in $@; do
+    if [[ "$arg" == "--weston-nogpu" ]]; then
+        echo "weston(nogpu) image is seletected"
+        TARGET_IMAGE=core-image-weston
+    elif [[ "$arg" == "-h" ]] || [[ "$arg" == "--help" ]]; then
+        Usage; exit
+    fi
+done
 
 cd $WORK
 git clone git://git.yoctoproject.org/poky
@@ -72,7 +93,18 @@ SPDX_ARCHIVE_SOURCES = "1"
 SPDX_ARCHIVE_PACKAGED = "1"
 EOS
 
-#bitbake linux-renesas
-bitbake core-image-minimal
-# bitbake core-image-minimal -c populate_sdk
+if [[ "$TARGET_IMAGE" == "core-image-weston" ]]; then
+cat << EOS >> conf/local.conf
+IMAGE_INSTALL:append = " mesa glmark2"
+DISTRO_FEATURES_NATIVESDK:append = " wayland"
+DISTRO_FEATURES:append = " pam"
+IMAGE_INSTALL:append = " glmark2 kernel-devicetree"
+DISTRO_FEATURES:remove = " ptest x11 vulkan"
+EOS
+fi
+if [[ "$USE_GPU" == "yes" ]]; then
+   echo "Not implemented now"
+fi
+
+bitbake ${TARGET_IMAGE}
 
