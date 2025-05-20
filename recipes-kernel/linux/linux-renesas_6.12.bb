@@ -25,8 +25,6 @@ KBUILD_DEFCONFIG = "defconfig"
 FILESEXTRAPATHS:prepend:sparrow-hawk = "${TOPDIR}/../../firmware:"
 SRC_URI:append:sparrow-hawk = " \
     file://sparrow_hawk.cfg \
-    file://rcar_gen4_pcie.bin;subdir=git/ \
-    file://renesas_usb_fw.mem;subdir=git/ \
 "
 KBUILD_DEFCONFIG:sparrow-hawk = "renesas_defconfig"
 KERNEL_DEVICETREE:append:sparrow-hawk = " \
