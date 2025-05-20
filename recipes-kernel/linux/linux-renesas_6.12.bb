@@ -13,9 +13,6 @@ PV = "${LINUX_VERSION}+git${SRCPV}"
 
 SRC_URI = "${REPO};branch=${BRANCH};protocol=https"
 KERNEL_DEFCONFIG = "renesas_defconfig"
-SRC_URI:append = "\
-    file://0006-Draft-FIXME-Force-DSC-clock-on.patch \
-"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
@@ -34,6 +31,7 @@ SRC_URI:append:sparrow-hawk = " \
 KBUILD_DEFCONFIG:sparrow-hawk = "renesas_defconfig"
 KERNEL_DEVICETREE:append:sparrow-hawk = " \
     renesas/r8a779g3-sparrow-hawk-fan-pwm.dtbo \
+    renesas/r8a779g3-sparrow-hawk-rpi-display-2.dtbo \
 "
 
 do_src_package_preprocess () {
