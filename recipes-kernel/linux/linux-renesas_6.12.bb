@@ -25,13 +25,24 @@ KBUILD_DEFCONFIG = "defconfig"
 FILESEXTRAPATHS:prepend:sparrow-hawk = "${TOPDIR}/../../firmware:"
 SRC_URI:append:sparrow-hawk = " \
     file://sparrow_hawk.cfg \
+    file://r8a779g3-sparrow-hawk-uio.dtso;subdir=git/arch/arm64/boot/dts/renesas/ \
 "
 KBUILD_DEFCONFIG:sparrow-hawk = "renesas_defconfig"
 KERNEL_DEVICETREE:append:sparrow-hawk = " \
     renesas/r8a779g3-sparrow-hawk-fan-pwm.dtbo \
     renesas/r8a779g3-sparrow-hawk-rpi-display-2.dtbo \
 "
+# uio_pdrv_genirq configuration
+KERNEL_MODULE_AUTOLOAD:append = " uio_pdrv_genirq"
+KERNEL_MODULE_PROBECONF:append = " uio_pdrv_genirq"
+module_conf_uio_pdrv_genirq:append = ' options uio_pdrv_genirq of_id="generic-uio"'
 
+do_compile:prepend:sparrow-hawk () {
+#    echo 'r8a779g3-sparrow-hawk-uio-dtbs := r8a779g3-sparrow-hawk.dtb r8a779g3-sparrow-hawk-uio.dtbo' >> ${S}/arch/arm64/boot/dts/renesas/Makefile
+#    echo 'dtb-$(CONFIG_ARCH_R8A779G0) += r8a779g3-sparrow-hawk-uio.dtb' >> ${S}/arch/arm64/boot/dts/renesas/Makefile
+    echo "" >> ${S}/arch/arm64/boot/dts/renesas/r8a779g3.dtsi
+    cat ${S}/arch/arm64/boot/dts/renesas/r8a779g3-sparrow-hawk-uio.dtso >> ${S}/arch/arm64/boot/dts/renesas/r8a779g3.dtsi
+}
 do_src_package_preprocess () {
     # Trim build paths from comments in generated sources to ensure reproducibility
     sed -i -e "s,${S}/,,g" \
