@@ -28,6 +28,7 @@ SRC_URI:append:sparrow-hawk = " \
     file://sparrow-hawk-enable-i2c3-i2c4.dtsi;subdir=git/arch/arm64/boot/dts/renesas/ \
     file://r8a779g3-sparrow-hawk-rpi-display-2-and-DP.dtso;subdir=git/arch/arm64/boot/dts/renesas/ \
     file://r8a779g3-sparrow-hawk-uio.dtso;subdir=git/arch/arm64/boot/dts/renesas/ \
+    file://0001-WIP-drivers-clk-r8a779g0-cpg-mssr-backport-from-BSP-.patch \
 "
 KBUILD_DEFCONFIG:sparrow-hawk = "renesas_defconfig"
 KERNEL_DEVICETREE:append:sparrow-hawk = " \
