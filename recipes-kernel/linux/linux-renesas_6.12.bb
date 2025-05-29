@@ -25,12 +25,17 @@ KBUILD_DEFCONFIG = "defconfig"
 FILESEXTRAPATHS:prepend:sparrow-hawk = "${TOPDIR}/../../firmware:"
 SRC_URI:append:sparrow-hawk = " \
     file://sparrow_hawk.cfg \
+    file://sparrow-hawk-enable-i2c3-i2c4.dtsi;subdir=git/arch/arm64/boot/dts/renesas/ \
 "
 KBUILD_DEFCONFIG:sparrow-hawk = "renesas_defconfig"
 KERNEL_DEVICETREE:append:sparrow-hawk = " \
     renesas/r8a779g3-sparrow-hawk-fan-pwm.dtbo \
     renesas/r8a779g3-sparrow-hawk-rpi-display-2.dtbo \
 "
+
+do_compile:prepend:sparrow-hawk () {
+    echo '#include "sparrow-hawk-enable-i2c3-i2c4.dtsi"' >>  ${S}/arch/arm64/boot/dts/renesas/r8a779g3-sparrow-hawk.dts
+}
 
 do_src_package_preprocess () {
     # Trim build paths from comments in generated sources to ensure reproducibility
