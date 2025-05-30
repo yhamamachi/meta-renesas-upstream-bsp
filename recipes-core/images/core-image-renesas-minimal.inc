@@ -13,6 +13,9 @@ IMAGE_INSTALL:append = " \
     i2c-tools \
     coreutils \
     kernel-devicetree \
+    alsa-utils \
+    v4l-utils \
+    yavta \
 "
 
 # Qos user packages only supports 64bit.
