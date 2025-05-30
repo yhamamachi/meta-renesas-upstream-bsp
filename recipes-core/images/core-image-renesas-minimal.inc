@@ -16,6 +16,8 @@ IMAGE_INSTALL:append = " \
     alsa-utils \
     v4l-utils \
     yavta \
+    nvme-cli \
+    can-utils \
 "
 
 # Qos user packages only supports 64bit.
