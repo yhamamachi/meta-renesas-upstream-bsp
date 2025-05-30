@@ -1,6 +1,6 @@
 
-LINUX_VERSION ?= "6.12.29"
+LINUX_VERSION ?= "6.12.31"
 REPO = "git://github.com/morimoto/linux.git"
-BRANCH = "renesas-lts/v6.12.29-2025-05-20-sparrow-hawk"
-SRCREV = "bd0dadb2ac7a23cd2d5d68f1447b8db570200760"
+BRANCH = "renesas-lts/v6.12.31-2025-05-30-sparrow-hawk"
+SRCREV = "38ecae6be8a0d71342a73ca9057e9d0a91b02c53"
 
