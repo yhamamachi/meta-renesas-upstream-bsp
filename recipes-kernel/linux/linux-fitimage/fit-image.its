@@ -40,11 +40,31 @@
 				algo = "crc32";
 			};
 		};
+		fdt-fan-pwm {
+			description = "Flattened Device Tree Overlay";
+			data = /incbin/("./r8a779g3-sparrow-hawk-fan-pwm.dtbo");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash-1 {
+				algo = "crc32";
+			};
+		};
+		fdt-rpi-display-2 {
+			description = "Flattened Device Tree Overlay";
+			data = /incbin/("./r8a779g3-sparrow-hawk-rpi-display-2.dtbo");
+			type = "flat_dt";
+			arch = "arm64";
+			compression = "none";
+			hash-1 {
+				algo = "crc32";
+			};
+		};
 	};
 
 	configurations {
-		default = "conf-1";
-		conf-1 {
+		default = "default";
+		default {
 			description = "Boot Linux kernel with FDT blob";
 			kernel = "kernel-1";
 			fdt = "fdt-1";
@@ -52,6 +72,12 @@
 			hash-1 {
 				algo = "crc32";
 			};
+		};
+		fan-pwm {
+			fdt = "fdt-fan-pwm";
+		};
+		rpi-display-2 {
+			fdt = "fdt-rpi-display-2";
 		};
 	};
 };
