@@ -15,11 +15,13 @@ DEPENDS += " \
 SRC_URI = " \
     file://fit-image.its \
     file://fit-image-pwm.its \
+    file://fit-image-rpi-display-2.its \
 "
 
 FILES:${PN} += " \
     /boot/fitImage \
     /boot/fitImage-pwm \
+    /boot/fit-image-rpi-display-2 \
 "
 
 do_configure[noexec] = "1"
@@ -36,11 +38,17 @@ do_compile() {
     install -m 644 ${WORKDIR}/fit-image-pwm.its ./
     sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image-pwm.its
     mkimage -f ./fit-image-pwm.its ./fitImage-pwm
+
+    cd ${DEPLOY_DIR}/images/${MACHINE}
+    install -m 644 ${WORKDIR}/fit-image-rpi-display-2.its ./
+    sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image-rpi-display-2.its
+    mkimage -f ./fit-image-rpi-display-2.its ./fit-image-rpi-display-2
 }
 do_install() {
     cd ${DEPLOY_DIR}/images/${MACHINE}
     install -d ${D}/boot
     install -m 644 ./fitImage ${D}/boot
     install -m 644 ./fitImage-pwm ${D}/boot
+    install -m 644 ./fit-image-rpi-display-2 ${D}/boot
 }
 
