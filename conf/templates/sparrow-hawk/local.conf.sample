@@ -306,5 +306,5 @@ IMAGE_INSTALL:append = " pciutils usbutils"
 IMAGE_INSTALL:append = " linux-fitimage"
 IMAGE_INSTALL:append = " kernel-modules"
 IMAGE_INSTALL:append = " sparrow-hawk-fw"
-
+IMAGE_INSTALL:append = " u-boot"
 

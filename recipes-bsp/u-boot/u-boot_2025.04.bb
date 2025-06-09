@@ -57,3 +57,11 @@ do_deploy:append() {
         install -m 644 ${B}/flash.bin ${DEPLOYDIR}/
     fi
 }
+
+# Install flash.bin into rootfs
+FILES:${PN} += "/flash.bin"
+do_install:append () {
+    install -d ${D}/boot
+    install -m 0644 ${B}/flash.bin ${D}
+}
+
