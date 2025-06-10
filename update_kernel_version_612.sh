@@ -10,7 +10,7 @@ CURRENT_BRANCH=$(cat recipes-kernel/linux/kernel_6.12.inc | grep BRANCH | awk '{
 if [[ "$LATEST_BRANCH" != "$CURRENT_BRANCH" ]]; then
     echo "New branch has been pushed !"
     BRANCH=${LATEST_BRANCH}
-    KERNEL_VERSION=$(echo $BRANCH | sed -e "s|.*renesas-lts/v||" -e "s/-.*$//")
+    KERNEL_VERSION=$(echo $BRANCH | sed -e "s|.*renesas-.*/v||" -e "s/-.*$//")
     COMMIT=$(curl -s ${API_URL} | jq ".[] | select(.name == ${BRANCH} ) | .commit.sha")
     #cat  recipes-kernel/linux/kernel_6.12.inc
     #echo "-----------------"
