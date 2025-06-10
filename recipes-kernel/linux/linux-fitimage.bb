@@ -16,14 +16,12 @@ SRC_URI = " \
     file://fit-image.its \
     file://fit-image-pwm.its \
     file://fit-image-rpi-display-2.its \
-    file://fit-image-rpi-display-2-and-DP.its \
 "
 
 FILES:${PN} += " \
     /boot/fitImage \
     /boot/fitImage-pwm \
     /boot/fitImage-rpi-display-2 \
-    /boot/fitImage-rpi-display-2-and-DP \
 "
 
 do_configure[noexec] = "1"
@@ -45,11 +43,6 @@ do_compile() {
     install -m 644 ${WORKDIR}/fit-image-rpi-display-2.its ./
     sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image-rpi-display-2.its
     mkimage -f ./fit-image-rpi-display-2.its ./fitImage-rpi-display-2
-
-    cd ${DEPLOY_DIR}/images/${MACHINE}
-    install -m 644 ${WORKDIR}/fit-image-rpi-display-2-and-DP.its ./
-    sed -i "s/bl31.bin/bl31-${MACHINE}.bin/" ./fit-image-rpi-display-2-and-DP.its
-    mkimage -f ./fit-image-rpi-display-2-and-DP.its ./fitImage-rpi-display-2-and-DP
 }
 do_install() {
     cd ${DEPLOY_DIR}/images/${MACHINE}
@@ -57,6 +50,5 @@ do_install() {
     install -m 644 ./fitImage ${D}/boot
     install -m 644 ./fitImage-pwm ${D}/boot
     install -m 644 ./fitImage-rpi-display-2 ${D}/boot
-    install -m 644 ./fitImage-rpi-display-2-and-DP ${D}/boot
 }
 
