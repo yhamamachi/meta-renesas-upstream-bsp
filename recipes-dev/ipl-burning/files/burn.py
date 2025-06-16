@@ -109,6 +109,9 @@ def sparrow_hawk_instruction_setup():
     print("Power off the board, then please set DIP-SW(SW2) as following")
     print_dip_sw(status=0x0f) # 1~4: OFF, 5~8: ON
     print("Then, connect board to PC using USB cable")
+    print("  If serial port has already been opened by other application(*),")
+    print("  please close the application to use serial port by this script")
+    print("  *) Teraterm, picocom, and so on.")
     print("")
     print("Press Enter key to proceed: "); input()
     print("")
@@ -154,7 +157,7 @@ def main():
 
     args = ["ipl_burning.py" ,BOARD, COM_PORT, MOT_PATH, IPL_PATH, BURN_MODE]
     ipl_burning.main(args)
-    
+
     if INSTRUCTION_MODE is True:
         sparrow_hawk_instruction_tidyup()
 
