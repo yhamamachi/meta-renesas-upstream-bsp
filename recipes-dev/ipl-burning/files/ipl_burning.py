@@ -221,44 +221,44 @@ def help(ipl_config):
 ####################################################################################################
 # Main
 ####################################################################################################
-def main():
+def main(argv):
     with open("ipl_burning.json") as ipl_config_file:
         ipl_config = json.load(ipl_config_file)
 
-    if len(sys.argv) < 6:
+    if len(argv) < 6:
         print_debug("ERROR", "Lack of argument")
         help(ipl_config)
 
-    if str(sys.argv[1]) not in ipl_config["flash_writer"].keys():
-        print_debug("ERROR", 'in valid soc name "%s"' % str(sys.argv[1]))
+    if str(argv[1]) not in ipl_config["flash_writer"].keys():
+        print_debug("ERROR", 'in valid soc name "%s"' % str(argv[1]))
         help(ipl_config)
-    SOC = str(sys.argv[1])
+    SOC = str(argv[1])
 
     DEV_NODE = None
     nodes = list(comports())
     if sys.platform == "win32":
-        serial_path = str(sys.argv[2])
+        serial_path = str(argv[2])
     else:
-        serial_path = os.path.realpath(str(sys.argv[2]))
+        serial_path = os.path.realpath(str(argv[2]))
     for node in nodes:
         if serial_path == node.device:
-            DEV_NODE = str(sys.argv[2])
+            DEV_NODE = str(argv[2])
             break
 
     if DEV_NODE is None:
-        print_debug("ERROR", "%s is not exists" % str(sys.argv[2]))
+        print_debug("ERROR", "%s is not exists" % str(argv[2]))
         help(ipl_config)
 
-    if os.path.exists(str(sys.argv[3] + "/" + ipl_config["flash_writer"][SOC])):
-        MOT_DIR = str(sys.argv[3])
+    if os.path.exists(str(argv[3] + "/" + ipl_config["flash_writer"][SOC])):
+        MOT_DIR = str(argv[3])
     else:
-        print_debug("ERROR", "%s/%s is not exists" % (sys.argv[3], ipl_config["flash_writer"][SOC]))
+        print_debug("ERROR", "%s/%s is not exists" % (argv[3], ipl_config["flash_writer"][SOC]))
         exit(1)
 
-    if os.path.exists(str(sys.argv[4])):
-        IPL_DIR = str(sys.argv[4])
+    if os.path.exists(str(argv[4])):
+        IPL_DIR = str(argv[4])
     else:
-        print_debug("ERROR", "%s is not exists" % str(sys.argv[4]))
+        print_debug("ERROR", "%s is not exists" % str(argv[4]))
         help(ipl_config)
 
     # Define IPL shortened option
@@ -281,7 +281,7 @@ def main():
     else:
         IPL_SHORTEN_OPTION = ["param", "bl2", "cert6", "bl31", "tee", "uboot"]
 
-    OPTION = sys.argv[5:]
+    OPTION = argv[5:]
     FILE_INFO_INDEX = []
     FILE_IPL_WILL_BURN = []
     IMGADR_WILL_BURN = []
@@ -379,8 +379,8 @@ def main():
     print_debug("INFO", "Download file .srec done")
     test_dev.baudrate = 115200
     test_dev.close()
-    exit(0)
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
+    exit(0)
