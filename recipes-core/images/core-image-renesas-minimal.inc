@@ -18,6 +18,7 @@ IMAGE_INSTALL:append = " \
     yavta \
     nvme-cli \
     can-utils \
+    expand-rootfs \
 "
 
 # Qos user packages only supports 64bit.
